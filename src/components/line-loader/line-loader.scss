@@ -1,0 +1,72 @@
+/*$color: var(--main-color);*/
+/*$white: rgba(241,255,250,1);*/
+
+$color: var(--cpr-color-main);
+$white: black;
+
+.line-loader-box-initial {
+	transition: .5s opacity;
+}
+
+.line-loader-mount{
+	opacity: 1;	
+}
+
+.line-loader-unmount{
+	opacity: 0;
+}
+
+.line-loader{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+
+	.line1,.line2{
+		position: absolute;
+		width: 100%;
+		height: 2px;
+	}
+
+	.line1{
+		background-color: $white;
+		animation: line-anim 2s infinite ease-in-out;
+	}
+	.line2 {
+		background-color: $color;
+		animation: inner-line-anim 2s infinite ease-in-out;
+	}
+}
+
+@keyframes line-anim {
+	0% {
+		transform: translateX(-100%);
+	}
+	33.3% {
+		transform: translateX(0);
+	}
+	66.6%{
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(100%);
+	}
+}
+
+@keyframes inner-line-anim {
+	0% {
+		transform: translateX(-100%);
+	}
+	16.6% {
+		transform: translateX(-100%);
+	}
+	50%{
+		transform: translateX(0);
+	}
+	83.3%{
+		transform: translateX(100%);
+	}
+	100% {
+		transform: translateX(100%);
+	}
+}

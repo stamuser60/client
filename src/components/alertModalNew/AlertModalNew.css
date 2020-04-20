@@ -1,0 +1,31 @@
+.details {
+  --item-height: 25px;
+  width: 100%;
+  overflow: auto;
+  padding: 8px 0;
+  box-sizing: border-box; }
+  .details > .items-container {
+    width: 100%; }
+    .details > .items-container > item {
+      direction: rtl;
+      display: block;
+      box-sizing: border-box;
+      position: relative;
+      display: flex; }
+      .details > .items-container > item > h {
+        --font-size: 14px;
+        color: var(--item-color);
+        font-size: var(--font-size); }
+      .details > .items-container > item > .name {
+        opacity: .6;
+        font-weight: 600;
+        text-align: right;
+        padding-right: 5px; }
+      .details > .items-container > item > .name:after {
+        content: ':'; }
+      .details > .items-container > item .value {
+        margin-right: auto;
+        direction: ltr;
+        text-align: left;
+        word-wrap: break-word;
+        padding-left: 5px; }

@@ -1,0 +1,35 @@
+$duration: .5s;
+.Navbar {
+	user-select: none;
+	position: fixed;
+	top: var(--body-padding);
+	border-radius: 10px;
+	width: calc(100% - 2 * var(--body-padding));
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	height: 125px;
+	/*position: relative;
+	width: 100%;
+	height: var(--nav-bar-height);*/
+	z-index: 1;
+	background-size: cover;
+	box-shadow: 0 5px 10px 0 rgba(0,0,0,.5);
+	/*background-color: var(--main-bg-color);*/
+	background-color: black;
+
+	border-bottom: var(--header-height) solid var(--cpr-color-main);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	box-sizing: border-box;
+
+	img {
+			height: 55px;
+			width: auto;
+			&:hover{
+				cursor: pointer;
+			}
+		}
+}

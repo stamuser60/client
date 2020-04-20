@@ -1,0 +1,77 @@
+.Alert {
+	width: 100%;
+	height: var(--alert-height);
+	box-sizing: border-box;
+	position: relative;
+	transition: background-color .3s;
+	overflow: hidden;
+
+	> .icon, > .alert-text{
+		display: inline-block;
+		height: var(--alert-height);
+		vertical-align: top;
+	}
+
+	> .icon, > .button {
+		display: inline-block;
+		width: 15%;
+		font-size: 20px;
+		line-height: var(--alert-height);
+		text-align: center;
+
+		.natural {
+			color: var(--color-natural-regular);
+		}
+		
+		.normal {
+			color: var(--color-normal-regular);
+		}
+
+		.warning {
+			color: var(--color-warning-regular);
+		}
+
+		.minor {
+			color: var(--color-minor-regular);
+		}
+
+		.major {
+			color: var(--color-major-regular);
+		}
+
+		.critical {
+			color: var(--color-critical-regular);
+		}
+	}
+	> .alert-text{
+		user-select: none;
+		display: inline-block;
+		font-size: 15px;
+		width: 70%;
+		line-height: var(--alert-height);
+		color: var(--item-color);
+		overflow: hidden;
+		text-align: center;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	> .button {
+		font-size: 16px;
+	}
+
+}
+
+.Alert.active {
+	background-color: rgba(0,0,0,.2);
+}
+
+.Alert:hover{
+	cursor: pointer;
+	background-color: rgba(0,0,0,.2)
+}
+
+.Alert:active{
+	/*cursor: pointer;*/
+	background-color: rgba(0,0,0,.5)
+}

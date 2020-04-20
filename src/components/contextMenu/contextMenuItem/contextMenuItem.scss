@@ -1,0 +1,22 @@
+.context-menu-item-container {
+  direction: rtl;
+  display: flex;
+  align-items: center;
+
+  &.disabled {
+    background-color: rgb(92, 92, 92);
+    color: #E2E2E2;
+    &:hover{
+      background-color:  rgb(92, 92, 92);
+      cursor: auto;
+    }
+  }
+
+  .text {
+    margin-right: 5px;
+  }
+
+  .icon {
+
+  }
+}

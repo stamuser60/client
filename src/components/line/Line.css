@@ -1,0 +1,16 @@
+.line {
+  animation: appear .75s;
+  /*stroke: rgba(100,100,100,.7);*/
+  stroke: rgba(0, 0, 0, 0.4);
+  stroke-width: 2;
+  z-index: 1;
+  cursor: pointer;
+  /*stroke-dasharray: 1;*/ }
+
+@keyframes appear {
+  from, to {
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); }
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }

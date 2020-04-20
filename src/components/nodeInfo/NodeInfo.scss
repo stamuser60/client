@@ -1,0 +1,111 @@
+$padding: 15px;
+.NodeInfo { 
+
+	height: 100%;
+	overflow-y: auto;
+
+	> .info {
+		padding: $padding;
+		> .information {
+			> .title {
+				font-weight: 700;
+				/*color: var(--main-color);*/
+				color: var(--item-color);
+				/*color: var(--cpr-color-main);*/
+
+				&:after {
+					content: ":";
+				}
+			}
+
+			.content {
+				text-align: left;
+				padding: 5px 0;
+
+				* {
+					font-size: 15px;
+				}
+
+				> input {
+					width: 100%;
+					color: var(--item-color);
+					text-align: left;
+					background: none;
+					border: none;
+					outline: none;
+					cursor: default;
+				}
+
+				.regex ,.description {
+					color: var(--item-color);
+					border: none;
+					/* to be reviewed */
+					width: calc(var(--sidebar-width) - 2 * #{$padding});
+					background: none;
+					border-radius: 3px;
+					direction: ltr;
+					outline: none;
+					cursor: default;
+					padding: 0;
+					box-sizing: border-box;
+					resize: none;
+					min-height: 19px;
+				}
+
+				> select {
+					color: var(--item-color);
+					background: none;
+					border: none;
+					outline: none;
+					cursor: default;
+
+					> option {
+						font-size: 15px;
+						color: var(--item-color);
+						background: #434343;
+						border: none;
+						position: absolute;
+						left: 0;
+						outline: none;
+						padding: 5px 0px;
+						cursor: default;
+					}
+				}
+
+				.text-editor{
+
+				}
+
+				&:not(.disabled) {
+					> input {
+						&:not(:focus):hover {
+							cursor: pointer;
+							color: white;
+						}
+
+						&:focus {
+							background: rgba(255, 255, 255, .1);
+							cursor: text;
+						}
+					}
+
+					.regex,.description {
+						&:not(:focus):hover {
+							cursor: pointer;
+							color: white;
+						}
+
+						&:focus {
+							background: rgba(255, 255, 255, .1);
+							cursor: text;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+/*textarea {
+	resize: none;
+}*/

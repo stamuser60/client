@@ -1,0 +1,62 @@
+$size: 50px;
+$icon-size: 25px;
+$time: .5s;
+
+.CancelPresentation {
+	background-color: #121212;
+	width:  $size;
+	height: $size;
+	position: fixed;
+	border-radius: var(--border-radius);
+	right: 0;
+	left: 0;
+	margin: 0 auto;
+	bottom: calc(var(--body-padding) - var(--sidebar-footer-height)/2);
+	cursor: pointer;
+	color: var(--item-color);
+	text-align: center;
+	font-size: 13px;
+	font-style: italic;
+	line-height: $size;
+
+	box-shadow: var(--controls-shadow);
+
+	&.show {
+		animation: appear-button $time;
+		animation-fill-mode: backwards;
+		animation-delay: 1.3s;
+		animation-timing-function: var(--timing-function);
+	}
+
+	&.hide {
+		animation: hide-button $time;
+		animation-fill-mode: forwards;
+		animation-timing-function: var(--timing-function);
+	}
+}
+
+@keyframes appear-button {
+
+	0% {
+		opacity: 0;
+		/*transform: translateY(30%) rotate(-90deg);*/
+		transform: translateY(30%) scale(.7);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0) rotate(0deg);
+	}
+}
+
+@keyframes hide-button {
+	0% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+	100% {
+		opacity: 0;
+		/*transform: translateY(30%) rotate(90deg);*/
+		transform: translateY(30%) scale(.7);
+
+	}
+}

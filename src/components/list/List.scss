@@ -1,0 +1,13 @@
+.List {
+
+	height: 100%;
+	overflow-y: auto;
+	/*overflow-x: none;*/
+
+	> div {
+		border-bottom: 1px rgba(255, 255, 255, .15) solid;
+	}
+/*	> div:hover {
+		background: var(--item-hover-background);
+	}*/
+}

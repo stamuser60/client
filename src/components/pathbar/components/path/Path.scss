@@ -1,0 +1,30 @@
+.path  {
+	/*display: inline;*/
+	color: var(--item-color);
+	font-size: 12px;
+	font-weight: 300;
+	cursor: pointer;
+	letter-spacing: 0.7px;
+	text-decoration: none;
+	user-select: none;
+	white-space: nowrap;
+	/*margin-left: 2px;*/
+
+	> i {
+		/*margin-right: 4px;*/
+	}
+}
+
+.path:hover {
+	color: white;
+}
+
+.path:nth-child(1n + 2)::before {
+	content: '>';
+	font-family: cursive;
+	margin-left: 3px;
+	margin-right: 3px;
+	cursor: default;
+	color: var(--item-color);
+	opacity: .5;
+}

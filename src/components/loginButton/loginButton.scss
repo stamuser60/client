@@ -1,0 +1,62 @@
+$right-bottom-spacing: 10px;
+$general-color: white;
+$font-size: 16px;
+$font-weight: 500;
+$height: 28px;
+
+.loginContainer {
+  direction: rtl;
+}
+
+.greeting {
+  display: flex;
+  align-items: center;
+  color: $general-color;
+  position: absolute;
+  left: $right-bottom-spacing;
+  bottom: $right-bottom-spacing;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  height: $height;
+  opacity: 0.8;
+}
+
+.connectBtn {
+  cursor: pointer;
+  color: $general-color;
+  display: flex;
+  align-items: center;;
+  position: absolute;
+  left: $right-bottom-spacing;
+  bottom: $right-bottom-spacing;
+  direction: rtl;
+  line-height: 10px;
+  font-size: $font-size + 2px;
+  font-weight: $font-weight;
+  letter-spacing: .1px;
+  width: auto;
+  height: $height;
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: $general-color;
+  background-color: transparent;
+  opacity: 0.8;
+
+  &:hover {
+    opacity: 1;
+  }
+  &:focus {
+    outline: transparent;
+  }
+}
+
+.userImgBtn {
+  max-height: 20px;
+  width: auto;
+}
+
+.userImgKnown {
+  max-height: 20px;
+  width: auto;
+  cursor: default !important;
+}

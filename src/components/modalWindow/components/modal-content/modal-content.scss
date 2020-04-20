@@ -1,0 +1,18 @@
+$duration: .5s;
+
+.modal-content{
+		animation: modal-content-appear $duration var(--timing-function);
+		animation-fill-mode: forwards;
+		overflow: hidden;
+		box-shadow: 0 10px 30px -8px inset black,
+					0 -10px 30px -8px inset black;
+}
+
+@keyframes modal-content-appear {
+	0% {
+		height: 0;
+	}
+	100% {
+		height: var(--content-height);
+	}
+}

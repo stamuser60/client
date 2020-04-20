@@ -1,0 +1,452 @@
+$new: '\f044';
+$search : '\f002';
+$save: '\f00c';
+$cancel: '\f00d';
+$duration: var(--transitionDuration);
+
+$width: 500px;
+
+$open-width: calc(100% - 4 * var(--body-padding) - 2 * var(--sidebar-width));
+$height: var(--bottom-bar-height);
+$open-height: calc(100% - var(--body-padding)*2 - var(--nav-bar-height));
+/*var(--open-height): 200px;*/
+$min-width: calc(#{$height} * 2);
+/*var(--timing-function): cubic-bezier(.8,0,.2,1.3);*/
+
+@mixin bottom-bar-animation($first, $before) {
+	animation-name: $first;
+	animation-duration: $duration;
+	animation-fill-mode: forwards;
+	animation-timing-function: var(--timing-function);
+	&:before {
+		animation-name: $before;
+		animation-duration: $duration;
+		animation-fill-mode: forwards;
+		animation-timing-function: var(--timing-function);
+	}
+}
+
+.bottom-bar {
+	/* Variable definition */
+	/*--btn-side-width: 50px;*/
+	--bar-bottom: var(--body-padding);
+
+	/* Animation properties */
+	animation-duration: 1000ms;
+	animation-timing-function: var(--timing-function);
+	animation-name: bottom-bar-show;
+	animation-fill-mode: backwards;
+
+	/* Properties */
+	width: $width;
+	@media screen and (max-width: 1200px
+	) {
+		width: 300px;
+	}
+	height: $height;
+	background-color: var(--top-main-color);
+	/*background-image: var(--gradient-cover);*/
+	/*background-color: rgba(40, 40, 40, 0.75);*/
+	margin: auto;
+	position: fixed;
+	bottom: var(--bar-bottom);
+	left: 0;
+	right: 0;
+	border-radius: var(--border-radius);
+	overflow: hidden;
+	z-index: 2;
+	// width delay fks animation - need to fix
+	transition: width $duration var(--timing-function) ,height $duration var(--timing-function);
+	
+	box-shadow: var(--controls-shadow);
+	
+
+	* {
+		user-select: none;
+	}
+
+	&.hide {
+
+		.hide-wrapper{
+			display: none !important;
+		}
+
+		.content{
+			overflow: hidden;
+
+			&:before{
+				content: '';
+				width: 175px;
+				height: 175px;
+				/*border: 3px solid white;*/
+				border-radius: 50%;
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				margin: auto;
+
+				animation-name: bottom-bar-content-load;
+				animation-duration: .6s;
+				animation-timing-function: linear;
+				animation-iteration-count: infinite;
+				box-shadow: inset 2px 2px 0 0 var(--cpr-color-main), inset 2px 6px 0 0 black, inset 2px 10px 0 0 white;
+			}
+		}
+	}
+	
+	.arrow{
+		width: 0;
+		height: 0;
+		display: inline-block;
+		border-left: 5px solid transparent;
+		border-right: 5px solid transparent;
+		border-bottom: 5px solid white;
+		transition: transform $duration var(--timing-function);
+
+		&.down {
+			transform: rotateX(180deg);
+			/*border-color: red;*/
+		}
+	}
+
+	&.normal-to-edit{
+		width: $min-width;
+		.middle{
+			opacity: 0;
+		}
+		.btn-side {
+			i{	
+				&.right {
+					@include bottom-bar-animation(rotate-in, save);	
+				}
+
+				&.left {
+					@include bottom-bar-animation(rotate-out, cancel);
+				}
+			}
+		}
+	}
+
+	&.edit-to-normal{
+		.btn-side {
+			i{
+				&.right {
+					animation-name: rotate-out;
+					animation-duration: $duration;
+					animation-fill-mode: both;
+					animation-timing-function: var(--timing-function);
+					&:before{
+						animation-name: new;
+						animation-duration: $duration;
+						animation-fill-mode: both;
+						animation-timing-function: var(--timing-function);
+					}
+				}
+				&.left {
+					animation-name: rotate-in;
+					animation-duration: $duration;
+					animation-fill-mode: both;
+					animation-timing-function: var(--timing-function);
+					&:before{
+						animation-name: search;
+						animation-duration: $duration;
+						animation-fill-mode: both;
+						animation-timing-function: var(--timing-function);
+					}
+				}
+			}
+		}			
+	}
+
+	&.normal-to-open{
+		height: $open-height;
+		width: $open-width;
+		@media screen and (max-width: 1500px) {
+			width: 820px
+		}
+		@media screen and (max-width: 970px) {
+			width: 600px
+		}
+		@media screen and (max-width: 750px) {
+			width: 400px
+		}
+		transition: width $duration var(--timing-function) ,height $duration var(--timing-function) $duration;
+		// need to change this after showing this shit to alon
+		.middle {
+			border-bottom: var(--border);
+		}
+		.btn-side{
+			/*width: 0;*/
+			&.pool-right{
+				position:absolute;
+				right: calc(-1 * #{$height});
+			}
+			&.pool-left{
+				position:absolute;
+				left: calc(-1 * #{$height});
+			}
+		}
+	}
+
+	&.open-to-edit {
+		transition: width $duration var(--timing-function) $duration,height $duration var(--timing-function);
+		width: $min-width;
+		.middle{
+			opacity: 0;
+			transition-delay: $duration;
+		}
+		.btn-side {
+			i{
+				&.right {
+					animation-name: rotate-in;
+					animation-duration: $duration;
+					animation-fill-mode: forwards;
+					animation-timing-function: var(--timing-function);
+					animation-delay: $duration;
+
+					&:before{
+						animation-name: save;
+						animation-duration: $duration;
+						animation-fill-mode: forwards;
+						animation-timing-function: var(--timing-function);
+						animation-delay: $duration;
+					}
+				}
+				&.left {
+					animation-name: rotate-out;
+					animation-duration: $duration;
+					animation-fill-mode: forwards;
+					animation-timing-function: var(--timing-function);
+					animation-delay: $duration;
+					&:before{
+						animation-name: cancel;
+						animation-duration: $duration;
+						animation-fill-mode: forwards;
+						animation-timing-function: var(--timing-function);
+						animation-delay: $duration;
+					}
+				}
+			}
+		}
+	}
+
+	&.open-to-normal {
+		transition: width $duration var(--timing-function) $duration,height $duration var(--timing-function);
+
+		.content{
+			display: none;
+		}
+	}
+	&.disapearBar {
+		animation-duration: 1s;
+		animation-timing-function: var(--timing-function);
+		animation-name: bottom-bar-close;
+		animation-fill-mode: both;
+		animation-delay: $duration;
+	}
+
+	.btn-side {
+		background-color: #0f0f0f;
+		position:absolute;
+		cursor: pointer;
+		height: $height;
+		width: $height;
+		padding: 0;
+		border: none;
+		display: inline-table;
+		text-align: center;
+		font-size: 13px;
+		transition: right $duration var(--timing-function) $duration,left $duration var(--timing-function) $duration,
+		background .3s var(--timing-function);
+
+		&.pool-right {
+			right: 0;
+			top:0;
+		}
+
+		&.pool-left {
+			left: 0;
+			top: 0;
+		}
+
+		&:hover{
+			background: rgba(0, 0, 0, .7);
+		}
+
+		i {
+			color: var(--item-color);
+			text-align: center;
+			display: table-cell;
+			vertical-align: middle;
+			top: 0;
+
+			&.right {
+				border-left: 1px solid #373737;
+			}
+			&.left {
+				border-right: 1px solid #373737;
+			}
+			
+
+			&:before{
+				font-family: FontAwesome;
+				font-weight: 900;
+				font-style: normal;
+				font-weight: normal;
+				text-decoration: inherit;
+			}
+
+			&.right:before{
+				content: $new;
+			}
+
+			&.left:before{
+				content: $search;
+			}
+		}
+	}
+
+	.content {
+		position: relative;
+		height: calc(100% - #{$height});
+		/*display: none !important;*/
+
+		.hide-wrapper {
+			height: 100%;
+
+			animation: content-appear .5s;
+		}
+	}
+
+	.middle {
+		background-color: var(--top-main-color);
+		height: $height;
+		border-bottom: none;
+		box-sizing: 1px solid black;
+		transition: opacity $duration var(--timing-function),background .3s var(--timing-function);
+		text-align: center;
+
+		&:hover{
+			cursor: pointer;
+			background: rgba(0, 0, 0, .7);
+		}
+
+		> .message {
+		color: var(--item-color);
+		font-size: 15px;
+		white-space: nowrap;
+		/*user-select: none;*/
+		direction: rtl;
+		}
+	}
+}
+
+/* timing the icons */
+@keyframes save {
+	0% {
+		content: $new;
+	}
+	100% {
+		content: $save;
+	}
+}
+
+@keyframes new {
+	0% {
+		content: $save;
+	}
+	100% {
+		content: $new;
+	}
+}
+
+@keyframes cancel {
+	0% {
+		content: $search;
+	}
+	100% {
+		content: $cancel;
+	}
+}
+
+@keyframes search {
+	0% {
+		content: $cancel;
+	}
+	100% {
+		content: $search;
+	}
+}
+
+
+@keyframes rotate-in {
+	100% {
+		transform: rotate(-360deg);
+	}
+}
+
+@keyframes rotate-out {
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+/*@keyframes open-bottom-bar {
+	100% {
+		height: 500px;
+	}
+}*/
+
+@keyframes bottom-bar-show {
+	0% {
+		box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0);
+		transform: scale(0);
+		opacity: 0;
+		width: calc(#{$height} * 2);
+		bottom: calc(-1 * #{$height});
+	}
+	50% {
+		transform: scale(1);
+		opacity: 1;
+		width: calc(#{$height} * 2);
+		bottom: var(--bar-bottom);
+	}
+}
+
+@keyframes bottom-bar-close {
+	50% {
+		transform: scale(1);
+		opacity: 1;
+		width: calc(#{$height} * 2);
+		/*bottom: var(--bar-bottom);*/
+	}
+	75% {
+		bottom: calc(var(--body-padding) - var(--sidebar-footer-height)/2);
+	}
+	100% {
+		box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0);
+		transform: scale(0);
+		opacity: 0;
+		width: calc(#{$height} * 2);
+	}
+}
+
+@keyframes content-appear{
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes bottom-bar-content-load {
+	from {
+		transform: rotate(0);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}

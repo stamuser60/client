@@ -1,0 +1,44 @@
+.CancelPresentation {
+  background-color: #121212;
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  border-radius: var(--border-radius);
+  right: 0;
+  left: 0;
+  margin: 0 auto;
+  bottom: calc(var(--body-padding) - var(--sidebar-footer-height)/2);
+  cursor: pointer;
+  color: var(--item-color);
+  text-align: center;
+  font-size: 13px;
+  font-style: italic;
+  line-height: 50px;
+  box-shadow: var(--controls-shadow); }
+  .CancelPresentation.show {
+    animation: appear-button 0.5s;
+    animation-fill-mode: backwards;
+    animation-delay: 1.3s;
+    animation-timing-function: var(--timing-function); }
+  .CancelPresentation.hide {
+    animation: hide-button 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: var(--timing-function); }
+
+@keyframes appear-button {
+  0% {
+    opacity: 0;
+    /*transform: translateY(30%) rotate(-90deg);*/
+    transform: translateY(30%) scale(0.7); }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg); } }
+
+@keyframes hide-button {
+  0% {
+    opacity: 1;
+    transform: translateY(0); }
+  100% {
+    opacity: 0;
+    /*transform: translateY(30%) rotate(90deg);*/
+    transform: translateY(30%) scale(0.7); } }

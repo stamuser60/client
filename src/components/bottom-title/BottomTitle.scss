@@ -1,0 +1,13 @@
+$height: 50px;
+.bottom-title { 
+	background-color: rgba(0,0,0,.3);
+	font-size: 15px;
+	height: $height;
+	border-bottom: 1px solid var(--border-color);
+	color: var(--item-color);
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}

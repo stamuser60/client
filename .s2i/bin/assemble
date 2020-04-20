@@ -1,0 +1,31 @@
+#!/bin/bash
+
+set -e
+
+NODE_TLS_REJECT_UNAUTHORIZED=0
+
+echo '----> Installing application source'
+cp -Rf /tmp/src/. .
+
+echo '----> Testing rather or not node_modules were provided by source git repository'
+
+if [[ -d node_modules ]]; then
+ echo '	----> node_module detected skipping npm install'
+ skip="True"
+elif ! [[ -z "$REGISTRY" ]]; then
+ echo "	----> Setting NPM registry to ${REGISTRY}"
+ npm config set registry "$REGISTRY"
+fi
+
+if ! [[ -z "$STRICT_SSL" ]]; then
+  echo "	----> Setting ssl-strict=false"
+  npm set strict-ssl "$STRICT_SSL"
+fi
+
+if [[ -z "$skip" ]]; then
+ echo '----> Installing npm dependencies...'
+ npm install
+fi
+
+echo '----> running npm run build'
+npm run build

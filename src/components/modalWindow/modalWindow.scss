@@ -1,0 +1,130 @@
+$duration: .5s;
+$border-color: rgba(255, 255, 255, .3);
+
+.modal {
+	/*animation: modal-fade-in $duration linear,*/
+	/*modal-grow-in $duration var(--timing-function);*/
+	/*animation-fill-mode: both;*/
+	position: fixed;
+	text-align: center;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	/*left:0;*/
+	/*right:0;*/
+	/*margin:auto;*/
+	// width: 350px;
+	width: var(--width);
+	// height: 100px;
+	overflow: hidden;
+	background-color: rgba(0, 0, 0, 0.78);
+	/*background-color: #434343;*/
+	border-radius: var(--border-radius);
+	outline: none;
+	/*box-shadow: 0 0 30px 2px rgba(0,0,0,.5);*/
+
+	.header {
+		/*width: 100%;*/
+		/*display: block;*/
+		/*height: var(--sidebar-title-height);*/
+		height: var(--sidebar-title-height);
+
+		/*background: rgba(0, 0, 0, 0.7);*/
+		background-color: var(--top-main-color);
+		/*background: var(--top-main-color);*/
+		color: var(--item-color);
+		border-top: 1px solid $border-color;
+		border-bottom: 2px solid $border-color;
+		/*box-shadow: 0 5px 20px -2px rgba(0,0,0,.5);*/
+
+		.title {
+			direction: rtl;
+			text-align: center;
+			line-height: var(--sidebar-title-height);
+			/*margin: 20px 0;*/
+			font-size: 23px;
+			font-weight: 600;
+		}
+	}
+
+	> .blueheader {
+		box-sizing: border-box;
+		border-radius: var(--border-radius) var(--border-radius) 0px 0px;
+		width: 100%;
+		height: var(--header-height);
+		background: var(--main-color);
+		border-bottom: 2px solid $border-color;
+		/*box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.5); */
+	}
+
+	> .footer {
+		box-sizing: border-box;
+		border-top: 2px solid $border-color;
+		height: var(--sidebar-footer-height);
+		/*background: rgba(0, 0, 0, 0.7);*/
+		background-color: var(--top-main-color);
+		/*background: var(--top-main-color);*/
+		width: 100%;
+		/*box-shadow: 0 0 30px 0 rgba(0,0,0,.5);*/
+		/*box-shadow: 0 -5px 20px -2px rgba(0,0,0,.5);*/
+
+	}
+
+  @keyframes modal-fade-in {
+
+	  0% {
+		opacity: 0;
+	  }
+	  to {
+		opacity: 1;
+	  }
+	}
+
+	@keyframes modal-grow-in {
+
+	  0% {
+		height: 100px;
+	  }
+	  to {
+		height: 300px;
+	  }
+	}
+
+	@keyframes modal-content-fade-in {
+		0%{
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+}
+
+.close-overlay {
+  animation: bg-fade-in var(--duration) ease-out;
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom: 0;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, .3);
+  box-shadow: 0 0 400px 5px rgba(0,0,0,.5) inset;
+  /*background-image: linear-gradient(to left top, rgba(0,0,0,.3), rgba(59,59,59,.3), rgba(119,119,119,.3), rgba(185,185,185,.3), rgba(227, 227, 227,.3));*/
+}
+
+@keyframes bg-fade-in {
+  from {opacity: 0;}
+  to { opacity: 1;}
+}
+
+.ReactModal__Overlay {
+  transition: opacity var(--duration) ease-in-out;
+  &--after-open {
+	opacity:1;
+  } 
+
+  &--before-close {
+	opacity: 0;
+  }
+}

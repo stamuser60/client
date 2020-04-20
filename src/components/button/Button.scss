@@ -1,0 +1,46 @@
+$border-total: 3px;
+.Button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	/*flex-grow: 1;*/
+	width: 100%;
+	flex-wrap: nowrap;
+	padding: 0;
+
+	color: rgba(256,256,256,.7);
+	font-size: 16px;
+
+	border-top: 1px solid var(--border-color);
+	border-bottom: 1px solid var(--border-color);
+	border-right: 1px solid var(--border-color);
+
+	transition: background-color,font-size;
+	transition-duration: .5s;
+
+	&:nth-last-child(1){
+		border-right: none;
+	}
+
+	&:hover{
+		background-color: rgba(0,0,0,.5);
+		font-size: 20px;
+		cursor: pointer;
+		i {
+			font-size: 40px;
+		}
+	}
+
+	i{
+		display: block;
+		text-align: center;
+		font-size: 25px;
+		transition: background-color,font-size;
+		transition-duration: .5s;
+	}
+
+	&.to-be-removed{
+		cursor: not-allowed;
+	}
+}

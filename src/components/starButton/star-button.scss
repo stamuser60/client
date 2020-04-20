@@ -1,0 +1,58 @@
+$empty-star: '\f006';
+$full-star: '\f005';
+$duration: .5s;
+$timing-function: cubic-bezier(0.68,0, 0.27, 2.25);
+
+
+@mixin icon($icon,$icon-animation) {
+	i:before{
+		content: $icon;
+	}
+/*	&.transition{
+		i:before{
+			animation-name: $icon-animation;
+			animation-duration: $duration;
+			animation-fill-mode: forwards;
+			animation-timing-function: $timing-function;
+		}
+	}*/
+}
+
+
+
+.star-button{
+
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	color: #e4d950;
+	transition: transform, color;
+	transition-duration: $duration;
+	transition-timing-function: $timing-function; 
+	
+	i{
+
+		vertical-align: middle;
+		font-family: FontAwesome;
+		font-weight: 900;
+		font-style: normal;
+		font-weight: normal;
+		text-decoration: inherit;
+	}
+
+	&.full{
+		@include icon($full-star,full)
+	}
+
+	&.empty{
+		@include icon($empty-star,empty)
+	}
+
+	&.loading{
+		transform: scale(.75);
+		color: #baffff !important;
+	}
+}

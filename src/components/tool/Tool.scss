@@ -1,0 +1,55 @@
+$padding: 20px;
+$margin: 20px;
+$img-size: 25px;
+
+.Tool { 
+	height: 70px;
+	width: 100%;
+	color: var(--item-color);
+	box-sizing: border-box;
+	transition: background-color .3s;
+	/*padding: 10px 0;*/
+
+	.container{
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		flex-direction: row-reverse;
+		text-align: right;
+		position: relative;
+
+		.name {
+			display: inline-block;
+			margin-right: $margin;
+			width: calc(100% - #{$padding} * 3 - #{$img-size}) ;
+			word-wrap: break-word;
+			font-size: 16px;
+			line-height: 14px;
+		}
+
+		.note {
+			direction: rtl;
+			font-size: 12px;
+			color: #9e9e9e;
+			position: absolute;
+			right: 3px;
+			top: 3px;
+			font-style: italic;
+			i {
+				margin-right: 3px;
+			}
+		}
+
+		img{
+			margin-right: $margin;
+			width: $img-size;
+			height: $img-size;
+		}
+	}
+}
+
+.Tool:hover {
+	cursor: pointer;
+	background-color: rgba(0,0,0,.2)
+}

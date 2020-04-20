@@ -1,0 +1,7 @@
+.alerts-error-modal {
+  padding: 20px 0; }
+  .alerts-error-modal .content {
+    color: var(--item-color); }
+  .alerts-error-modal img {
+    margin-top: 20px;
+    height: 50px; }

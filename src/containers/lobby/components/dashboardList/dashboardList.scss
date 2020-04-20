@@ -1,0 +1,158 @@
+$btnSize: 50px;
+$btnBotton: 35px;
+
+.DashboardList {
+  --button-size: 50px;
+  --offset: 3px;
+  position: fixed;
+  bottom: 20px;
+  right: 40px;
+
+  button {
+    position: relative;
+    display: inline-block !important;
+    z-index: 3;
+    width: var(--button-size);
+    height: var(--button-size);
+
+    border-radius: 100px;
+    margin-left: 20px;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(0, 0, 0, 0.6);
+    text-align: center;
+    -webkit-animation: nav-button-enter 300ms backwards ease-in-out;
+    animation: nav-button-enter 300ms backwards ease-in-out;
+    border: none;
+    outline: none; 
+    .dropup {
+      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+      text-align: right;
+      border-top: 2px solid var(--color-main-regular);
+      background: var(--top-main-color);
+      width: auto;
+      height: auto;
+      position: absolute;
+      bottom: 100%;
+      -webkit-transform: translate(0, 8px);
+      transform: translate(0, 8px);
+      margin-bottom: 10px;
+      white-space: nowrap;
+      padding: 10px 0;
+      z-index: 2;
+      opacity: 0;
+      pointer-events: none;
+      right: 0;
+      direction: rtl;
+      width: 200px;
+      outline: none;
+      transition-duration: 300ms;
+      transition-timing-function: ease-in-out;
+      &:hover {
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+        -webkit-transform: translate(0, 0);
+        transform: translate(0, 0);
+        opacity: 1;
+        pointer-events: initial;
+      }
+
+      &:after {
+          --arrow-size: 4px;
+          --offset: calc((var(--button-size) / 2) - var(--arrow-size));
+          position: absolute;
+          vertical-align: middle;
+          border-top: var(--arrow-size) solid black;
+          border-right: var(--arrow-size) solid transparent;
+          border-bottom: 0 dotted;
+          border-left: var(--arrow-size) solid transparent;
+          content: "";
+          bottom: calc((-1) * var(--arrow-size));
+          right: var(--offset); 
+      }
+
+      &:before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 30px;
+        bottom: -30px;
+        background: transparent;
+      }
+
+      .title {
+        font-size: 12px;
+        font-weight: 300;
+        letter-spacing: .1px;
+        color: rgba(255, 255, 255, 0.5);
+        padding: 0 15px 5px 5px;
+        display: block;
+        top: 10px;
+        transition-duration: 300ms;
+        transition-timing-function: ease-in-out;
+        &:after {
+          content: '';
+          height: 1px;
+          background: rgba(255, 255, 255, 0.15);
+          margin-top: 20.5px;
+          width: 100%;
+          position: absolute;
+          left: 0;
+        }
+      }
+      .list {
+        max-height: 250px;
+        display: block;
+        overflow: auto;
+        margin-top: 7px;
+        .list-item {
+          padding: 3px 13px;
+          overflow: hidden;
+          width: 100%;
+          position: relative;
+          max-height: 50px;
+          color: rgba(255, 255, 255, 0.75);
+          box-sizing: border-box;
+          cursor: pointer;
+          transition-duration: 300ms;
+          transition-timing-function: ease-in-out;
+          &:hover {
+            background-color: #818181;
+          }
+        }
+      }
+    }
+    transition: background-color 0.4s;
+    
+    &:hover {
+      background-color: #0f0f0f;
+      
+      .dropup {
+        -webkit-transform: translate(0, 0);
+        transform: translate(0, 0);
+        opacity: 1;
+        pointer-events: initial;
+      }
+    }
+    .icon {
+      position: absolute;
+      top: 25%;
+      margin: auto;
+      left: 1px;
+      right: 0; 
+      font-size: 25px;
+      line-height: 25px;
+      // font-family: 'Glyphicons';
+    }
+  }
+} 
+  
+  @-webkit-keyframes nav-button-enter {
+    from {
+      -webkit-transform: translateY(calc(var(--offset) * -1));
+              transform: translateY(calc(var(--offset) * -1));
+      opacity: 0; } }
+  
+  @keyframes nav-button-enter {
+    from {
+      -webkit-transform: translateY(calc(var(--offset) * -1));
+              transform: translateY(calc(var(--offset) * -1));
+      opacity: 0; } }

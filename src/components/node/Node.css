@@ -1,0 +1,252 @@
+.node-container {
+  position: absolute;
+  width: var(--circle-size);
+  height: var(--circle-size);
+  border-radius: var(--circle-size);
+  z-index: 2;
+  box-sizing: border-box; }
+  .node-container * {
+    user-select: none; }
+  .node-container .name {
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -16px;
+    background: rgba(0, 0, 0, 0.6);
+    white-space: nowrap;
+    color: white;
+    padding: 0 8px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 12px;
+    line-height: 16px;
+    /*height: 16px;*/
+    /*display: block;*/
+    border-radius: 100px;
+    /*user-select: none;*/
+    direction: rtl;
+    /*backface-visibility: visible;*/
+    -webkit-font-smoothing: subpixel-antialiased;
+    /*z-index: -1;*/ }
+
+.Node {
+  /*display: table;*/
+  height: 100%;
+  border-radius: var(--circle-size);
+  animation: singlePopNode .75s;
+  box-shadow: var(--node-shadow);
+  cursor: pointer;
+  /*transition: filter .5s ease-in-out;*/
+  /*box-sizing: border-box;*/
+  /*overflow: hidden;*/
+  /*background-image: var(--gradient-cover);*/
+  /*	@keyframes singlePopNode {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}*/
+  /*
+	.popOut{
+		animation: 0.75s ease-out 0s 1 popOut;
+	}*/ }
+  .Node .content {
+    border: var(--circle-border) var(--circle-border-color) solid;
+    border-radius: 100%;
+    transition: box-shadow .25s ease-in-out,background-color .5s;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5) inset;
+    box-sizing: border-box;
+    border-radius: 100%;
+    background-color: var(--background-color);
+    width: 100%;
+    height: 100%; }
+  .Node.grayed {
+    filter: grayscale(50%); }
+  .Node:hover .content, .Node.selected .content {
+    /*box-shadow: 0 0 7px 0 rgba(0,0,0,.5) inset;*/
+    background-color: var(--background-color-onhover); }
+  .Node i {
+    --font-color: gray;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 22px;
+    color: white; }
+  .Node .icon-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden; }
+    .Node .icon-container .icon {
+      position: absolute;
+      /*align-self: flex-start;*/
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      width: 25px;
+      height: 25px;
+      z-index: 1;
+      transition-property: bottom,width,height,transform, opacity;
+      transition-timing-function: var(--timing-function);
+      /*transition-duration: .75s;*/
+      transition-duration: .5s; }
+      .Node .icon-container .icon.show-drill {
+        /*transform: rotate(0deg);*/
+        transform: translateY(0);
+        opacity: 1; }
+      .Node .icon-container .icon.hide-drill {
+        /*transform: rotate(-180deg);*/
+        transform: translateY(-60%);
+        opacity: 0; }
+      .Node .icon-container .icon.show-type {
+        /*transform: rotate(0deg);*/
+        transform: translateY(0);
+        opacity: 1; }
+      .Node .icon-container .icon.hide-type {
+        /*transform: rotate(180deg);*/
+        transform: translateY(60%);
+        opacity: 0; }
+    .Node .icon-container .regex {
+      opacity: 0;
+      /*transition: opacity .3s;*/
+      color: var(--item-color);
+      align-self: flex-end;
+      font-size: 14px;
+      padding-bottom: 5px;
+      font-weight: 700; }
+    .Node .icon-container.regex .icon {
+      bottom: 8px;
+      width: 20px;
+      height: 20px; }
+    .Node .icon-container.regex .regex {
+      opacity: 1; }
+
+@keyframes pop {
+  from, 20%, 40%, 60%, 80%, to {
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); }
+  0% {
+    /*opacity: 0;*/
+    transform: scale(0.3); }
+  20% {
+    transform: scale(1.1); }
+  40% {
+    transform: scale(0.9); }
+  60% {
+    opacity: 1;
+    transform: scale(1.03); }
+  80% {
+    transform: scale(0.97); }
+  to {
+    /*opacity: 1;*/
+    transform: scale(1); } }
+
+@keyframes popOut {
+  20% {
+    transform: scale(0.9); }
+  50%, 55% {
+    opacity: 1;
+    transform: scale(1.1); }
+  to {
+    opacity: 0;
+    transform: scale(0.3); } }
+
+.Node.natural .content {
+  --background-color: var(--color-natural-regular);
+  --background-color-onhover: var(--color-natural-dark); }
+
+.Node.normal .content {
+  --background-color: var(--color-normal-regular);
+  --background-color-onhover: var(--color-normal-dark); }
+
+.Node.warning .content {
+  --background-color: var(--color-warning-regular);
+  --background-color-onhover: var(--color-warning-dark); }
+
+.Node.minor .content {
+  --background-color: var(--color-minor-regular);
+  --background-color-onhover: var(--color-minor-dark); }
+
+.Node.major .content {
+  --background-color: var(--color-major-regular);
+  --background-color-onhover: var(--color-major-dark); }
+
+.Node.critical .content {
+  animation: vip .75s ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate; }
+
+.Node.vip .content {
+  animation: vip .75s ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate; }
+
+@keyframes vip {
+  from {
+    background-color: #fa3a3a; }
+  to {
+    background-color: #b43a3a; } }
+
+/*.bounce {
+	animation: singlePopNode .75s;
+}*/
+@keyframes singlePopNode {
+  0% {
+    opacity: 0;
+    transform: scale(0.3); }
+  33.3% {
+    transform: scale(1.1); }
+  66.6% {
+    transform: scale(0.95); }
+  to {
+    opacity: 1;
+    transform: scale(1); } }
+
+/*	.icon-box-default{
+		width: 100%;
+		height: 100%;
+		position: absolute;
+	}
+
+	.icon-mount,.icon-unmount{
+		animation-duration: 1s;
+		animation-timing-function: var(--timing-function); 
+	}
+
+	.icon-mount{
+		animation-name: spin-icon-mount;
+	}
+
+	.icon-unmount {
+		animation-name: spin-icon-unmount
+	}*/
+/*	@keyframes spin-icon-mount {
+		from {
+			opacity: 0;
+			transform: rotate(-180deg);
+		}
+		to {
+			opacity: 1;
+			transform: rotate(0deg);
+		}
+
+	}
+
+	@keyframes spin-icon-unmount {
+		from {
+			opacity: 1;
+			transform: rotate(0deg);
+		}
+		to {
+			opacity: 0;
+			transform: rotate(180deg);
+		}
+	}*/

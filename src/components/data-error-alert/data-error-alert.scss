@@ -1,0 +1,58 @@
+$width: 250px;
+$height: 50px;
+$padding: 30px;
+
+.data-error-alert {
+	width: $width;
+	height: $height;
+	/*to get from alert color*/
+	background-color: rgb(172, 83, 83);
+	color: white;
+	direction: rtl;
+	font-family: Assistant;
+	font-size: 18px;
+	position: fixed;
+	border-radius: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	left: $padding;
+	padding-right: 5px;
+	box-shadow: 0 0 20px 0 rgba(0,0,0,.5) inset;
+	z-index: 50;
+	
+	/*transition: bottom .25s var(--timing-function);*/
+	// bottom: $padding;
+	
+	animation: data-error-alert-appear .5s var(--timing-function);
+	animation-fill-mode: both;
+	// animation: vip .75s ease-in-out;
+	// animation-iteration-count: infinite;
+	// animation-direction: alternate;	
+
+/*	&.hide{
+		bottom: calc(-1 * #{$height});
+	}
+	&.show {
+		bottom: $padding;
+	}*/
+}
+
+@keyframes data-error-alert-appear {
+	from {
+		bottom: calc(-1 * #{$height});
+	}
+	to {
+		bottom: $padding;
+	}
+}
+
+@keyframes vip{
+	from {
+		background-color: rgb(250,58,58);
+		// color: black;
+	}
+	to {
+		background-color: rgb(180,58,58);
+	}
+}

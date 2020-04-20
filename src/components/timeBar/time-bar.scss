@@ -1,0 +1,288 @@
+$size: 20px;
+$time: .3s;
+$bottom-arrow-height: 6px;
+$colorB: #e9f3f6;
+$colorA: #93c4d3;
+$background-color: black;
+$selected-area-color: rgba(254, 233, 89, .65);
+$timing-function: var(--timing-function);
+
+
+.time-bar {
+
+	position: fixed;
+	left: var(--body-padding);
+	bottom: var(--body-padding);
+	width: var(--sidebar-width);
+	@media screen and (max-width: 1500px) {
+		bottom: var(--body-under-padding);
+	}
+	height: var(--sidebar-footer-height);
+	user-select: none;
+	border-radius: var(--border-radius);
+	opacity: 1;
+	transition-property: opacity;
+	transition-duration: $time;
+
+	box-shadow: var(--controls-shadow);
+
+	* {
+		user-select: none;
+
+	}
+
+	&.hide{
+		opacity: 0;
+	}
+
+	&:hover,&:active{
+
+		.output .text{
+			top: 100%;
+			font-size: 17px;
+		}
+		
+	/*	.ruler-background:before {
+			opacity: 1;
+		}*/
+
+		.my-thumb, input[type='range']::-webkit-slider-thumb {
+			top: calc(-1 * (#{$size} + #{$bottom-arrow-height}) + 2px);
+		}
+
+		.my-thumb{
+			width: $size;
+			border-radius: 50%;
+			opacity: 1;
+
+			.inner-circle{
+				width: 50%;
+				height: 50%;
+				border-radius: 100%;
+			}
+
+			&:before{
+				bottom: calc(-.5 * #{$bottom-arrow-height});
+				width: 10px;
+			}
+
+			&:after{
+				content: '';
+				position: absolute;
+				margin: 0 auto;
+				top: 100%;
+				height: 4px;
+				width: 20px;
+			}
+		}
+	}
+
+	&,input[type='range']{
+		cursor: pointer;		
+	}
+
+	input[type='range'] {
+		pointer-events: none;
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		-webkit-appearance: none;
+		background-color: rgba(0,0,0,0);
+		border-radius: 5px;
+		position: absolute;
+		left: 0;
+		background-color: rgba(0,255,0,0);
+
+		&:focus{
+			outline: none;
+		}
+	}
+
+	input[type='range']::-webkit-slider-thumb {
+		pointer-events: all;
+		-webkit-appearance: none;
+		position: relative;
+		z-index: 100;
+		background-color: rgba(255,0,0,0);
+		height: $size;
+	}
+
+	input[type='range']::-webkit-slider-thumb, .my-thumb.hidden{
+		width: 30px;
+	}
+
+	.selected-area {
+		position: absolute;
+		/*background-color: rgba(147, 196, 211, .5);*/
+		background-color: $selected-area-color;
+		/*background-image: linear-gradient(10deg, rgba(15,50,68,.2), rgba(255,255,255,.2));*/
+
+		height: 100%;
+		z-index: 1;
+	}
+
+	.my-thumb {
+		transition-property: top,border-radius,width,opacity;
+		transition-timing-function: $timing-function;
+		transition-duration: $time;
+		border-radius: 1px;
+		width: 2px;
+		/*opacity: .5;*/
+		height: $size;
+		background-color: $colorB;
+		position: absolute;
+		top: 0;
+		z-index: 3;
+
+		margin: 0 auto;
+
+		.inner-circle {
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			margin: auto;
+			width: 0;
+			height: 100%;
+			background-color: $colorA;
+		}
+
+		&.hidden {
+			transition: none;
+			visibility: hidden;
+		}
+	
+		&:before{
+			transition-property: width,bottom;
+			transition-timing-function: $timing-function;
+			--height: 6px;
+			transition-duration: $time;
+			content: '';
+			width: 0;
+			height: $bottom-arrow-height;
+			background-color: $colorB;
+			position: absolute;
+			right: 0;
+			left:0;
+			margin: 0 auto;
+			bottom: 0;
+			clip-path: polygon(50% 100%, 0 0, 100% 0);
+		}
+	}
+
+	.output{
+		width: 100%;
+		height: var(--sidebar-footer-height);
+		position: absolute;
+		top: 0;
+		text-align: center;
+
+		/*z-index: -1;*/
+
+		&:after{
+			content: '';
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			background-color: rgba(0, 0, 0, 0.8);
+			border-radius: var(--border-radius);
+			z-index: -1;
+		}
+		.text{
+			position: absolute;
+			z-index: 10;
+			top: 0;
+			width: 100%;
+			color: var(--item-color);
+			line-height: var(--sidebar-footer-height);
+			font-size: 12px;
+			user-select: none;
+
+			transition-property: top,font-size;
+			transition-duration: $time;
+			transition-timing-function: $timing-function;
+		}
+	}
+}
+
+.ruler-background:before {
+	opacity: .5;
+	transition-property: opacity;
+	transition-duration: $time;
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: var(--border-radius);
+	background-color: $background-color;
+	background-image: 
+	linear-gradient(90deg, 
+		rgba(255, 255, 255, 0.5) 0, 
+		rgba(255, 255, 255, 0.5) 2%, 
+		transparent 2%
+	), 
+	linear-gradient(180deg, 
+		$background-color 50%, 
+		transparent 50%
+	), 
+	linear-gradient(90deg, 
+		transparent 50%, 
+		rgba(255, 255, 255, 0.5) 50%, 
+		rgba(255, 255, 255, 0.5) 52%, 
+		transparent 52%
+	), 
+	linear-gradient(180deg, 
+		$background-color 70%, 
+		transparent 70%
+	), 
+	linear-gradient(90deg, 
+		transparent 10%,
+		rgba(255, 255, 255, 0.4) 10%, 
+		rgba(255, 255, 255, 0.4) 12%, 
+		transparent 12%, 
+	  
+		transparent 20%,
+		rgba(255, 255, 255, 0.4) 20%, 
+		rgba(255, 255, 255, 0.4) 22%, 
+		transparent 22%, 
+	  
+		transparent 30%, 
+		rgba(255, 255, 255, 0.4) 30%,
+		rgba(255, 255, 255, 0.4) 32%, 
+		transparent 32%, 
+	  
+		transparent 40%, 
+		rgba(255, 255, 255, 0.4) 40%, 
+		rgba(255, 255, 255, 0.4) 42%, 
+		transparent 42%, 
+		
+		transparent 60%, 
+		rgba(255, 255, 255, 0.4) 60%, 
+		rgba(255, 255, 255, 0.4) 62%, 
+		transparent 62%, 
+		
+		transparent 70%, 
+		rgba(255, 255, 255, 0.4) 70%, 
+		rgba(255, 255, 255, 0.4) 72%, 
+		transparent 72%, 
+		
+		transparent 80%, 
+		rgba(255, 255, 255, 0.4) 80%, 
+		rgba(255, 255, 255, 0.4) 82%, 
+		transparent 82%, 
+		
+		transparent 90%, 
+		rgba(255, 255, 255, 0.4) 90%, 
+		rgba(255, 255, 255, 0.4) 92%, 
+		transparent 92%
+	);
+
+	background-size: 50px 20px;
+	background-repeat: repeat-x;
+	min-height: 20px;
+}

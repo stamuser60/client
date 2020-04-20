@@ -1,0 +1,10 @@
+.countdown-display .error {
+  animation: countdown-display-error .75s linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate; }
+
+@keyframes countdown-display-error {
+  from {
+    color: #ff3a3a; }
+  to {
+    color: #b93a3a; } }

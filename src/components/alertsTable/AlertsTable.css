@@ -1,0 +1,62 @@
+.AlertsTable {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100%; }
+  .AlertsTable .table {
+    table-layout: fixed;
+    width: 100%; }
+    .AlertsTable .table .tableRow {
+      transition: background-color .3s; }
+      .AlertsTable .table .tableRow:hover {
+        background-color: rgba(136, 136, 136, 0.62); }
+      .AlertsTable .table .tableRow.active {
+        background-color: rgba(136, 136, 136, 0.62); }
+    .AlertsTable .table tr {
+      user-select: pointer;
+      color: white; }
+      .AlertsTable .table tr th.sev, .AlertsTable .table tr th.maktag, .AlertsTable .table tr th.node, .AlertsTable .table tr th.date, .AlertsTable .table tr th.text {
+        text-align: center;
+        cursor: pointer; }
+      .AlertsTable .table tr th.active {
+        background-color: rgba(136, 136, 136, 0.62); }
+      .AlertsTable .table tr .sev, .AlertsTable .table tr .maktag, .AlertsTable .table tr .node, .AlertsTable .table tr .date, .AlertsTable .table tr .text {
+        padding-left: 5px;
+        padding-right: 5px;
+        text-align: center; }
+      .AlertsTable .table tr .sev {
+        width: 40px; }
+      .AlertsTable .table tr .maktag {
+        width: 50px;
+        cursor: pointer; }
+      .AlertsTable .table tr .node {
+        width: 130px;
+        overflow: hidden;
+        word-break: break-all;
+        white-space: nowrap;
+        text-overflow: ellipsis; }
+      .AlertsTable .table tr .date {
+        width: 150px; }
+      .AlertsTable .table tr .text {
+        text-align: left;
+        padding-right: 10px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap; }
+    .AlertsTable .table .natural {
+      color: var(--color-natural-regular); }
+    .AlertsTable .table .normal {
+      color: var(--color-normal-regular); }
+    .AlertsTable .table .warning {
+      color: var(--color-warning-regular); }
+    .AlertsTable .table .minor {
+      color: var(--color-minor-regular); }
+    .AlertsTable .table .major {
+      color: var(--color-major-regular); }
+    .AlertsTable .table .critical {
+      color: var(--color-critical-regular); }
+.Try {
+  position: absolute;
+  right:50;
+  width:50;
+  background-color: red;
+}

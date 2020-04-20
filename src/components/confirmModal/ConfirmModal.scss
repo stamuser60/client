@@ -1,0 +1,30 @@
+.confirm-modal {
+    display: flex;
+    .option {
+        width:50%;
+        font-weight:600;
+        font-size: 18px;
+        color: var(--item-color);
+        cursor: pointer;
+        &:hover {
+            animation:hover .2s forwards;
+            >h3 {
+                animation:fontInc .2s forwards;
+            }
+        }
+        
+    }
+}
+
+@keyframes hover {
+    to {
+        background-color: rgba(136, 136, 136, 0.62);
+        border-radius:3%;
+    }
+}
+
+@keyframes fontInc {
+    to {
+        transform: scale(1.1)
+    }
+}

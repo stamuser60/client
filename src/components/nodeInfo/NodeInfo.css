@@ -1,0 +1,69 @@
+.NodeInfo {
+  height: 100%;
+  overflow-y: auto; }
+  .NodeInfo > .info {
+    padding: 15px; }
+    .NodeInfo > .info > .information > .title {
+      font-weight: 700;
+      color: var(--main-color); }
+      .NodeInfo > .info > .information > .title:after {
+        content: ":"; }
+    .NodeInfo > .info > .information .content {
+      text-align: left;
+      padding: 5px 0; }
+      .NodeInfo > .info > .information .content * {
+        font-size: 15px; }
+      .NodeInfo > .info > .information .content > input {
+        width: 100%;
+        color: var(--item-color);
+        text-align: left;
+        background: none;
+        border: none;
+        outline: none;
+        cursor: default; }
+      .NodeInfo > .info > .information .content .regex, .NodeInfo > .info > .information .content .description {
+        color: var(--item-color);
+        border: none;
+        /* to be reviewed */
+        width: calc(var(--sidebar-width) - 2 * 15px);
+        background: none;
+        border-radius: 3px;
+        direction: ltr;
+        outline: none;
+        cursor: default;
+        padding: 0;
+        box-sizing: border-box;
+        resize: none;
+        min-height: 19px; }
+      .NodeInfo > .info > .information .content > select {
+        color: var(--item-color);
+        background: none;
+        border: none;
+        outline: none;
+        cursor: default; }
+        .NodeInfo > .info > .information .content > select > option {
+          font-size: 15px;
+          color: var(--item-color);
+          background: #434343;
+          border: none;
+          position: absolute;
+          left: 0;
+          outline: none;
+          padding: 5px 0px;
+          cursor: default; }
+      .NodeInfo > .info > .information .content:not(.disabled) > input:not(:focus):hover {
+        cursor: pointer;
+        color: white; }
+      .NodeInfo > .info > .information .content:not(.disabled) > input:focus {
+        background: rgba(255, 255, 255, 0.1);
+        cursor: text; }
+      .NodeInfo > .info > .information .content:not(.disabled) .regex:not(:focus):hover, .NodeInfo > .info > .information .content:not(.disabled) .description:not(:focus):hover {
+        cursor: pointer;
+        color: white; }
+      .NodeInfo > .info > .information .content:not(.disabled) .regex:focus, .NodeInfo > .info > .information .content:not(.disabled) .description:focus {
+        background: rgba(255, 255, 255, 0.1);
+        cursor: text; }
+
+/*textarea {
+	resize: none;
+}*/

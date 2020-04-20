@@ -1,0 +1,124 @@
+$diameter: 200px;
+$good-color: rgba(65, 104, 78, 0.5);
+$bad-color: rgba(110, 58, 61, 0.5);
+$bad-border: rgb(188, 80, 80);
+$good-border: rgb(79, 188, 131);
+$bad-text: rgb(200, 124, 115);
+$no-data-color: rgba(255, 255, 255, .1);
+$no-data-border: rgb(133, 133, 133);
+/*$no-data-border: blue;*/
+
+$padding: 10px;
+$title-size: 23px;
+$content-size: 18px;
+$mini-title-size: 12px;
+
+.circle-card {
+	margin: 10px;
+	width: $diameter;
+	min-width: $diameter;
+	height: $diameter;
+	border-radius: 50%;
+	background: rgba(0, 0, 0, 0.8);
+	background-image: linear-gradient(-140deg, rgba(255, 255, 255, .05), rgba(0, 0, 0, .3));
+	color: rgba(255, 255, 255, 0.9);
+	border: 3px solid $no-data-border;
+	box-shadow: 0 0 10px 0.2px rgba(0, 0, 0, .5);
+	overflow: hidden;
+	box-sizing: border-box;
+	transition: transform .25s var(--timing-function);
+
+	&.bad{
+
+		border: 3px solid $bad-border;
+			
+		.mid {
+			background-color: $bad-color;
+		}
+	}
+
+	&.good{
+
+		border: 3px solid $good-border;
+
+		.mid {
+			background-color: $good-color;
+		}
+
+	}
+
+	&:hover {
+		cursor: pointer;
+		transform: scale(1.1);
+	}
+	
+	* {
+		box-sizing: border-box;
+	}
+
+
+	.mini-title {
+		font-size: $mini-title-size;
+		margin-top: -5px;
+		color: rgba(255, 255, 255, .6);
+		font-weight: 700;
+		vertical-align: top;
+	}
+
+	.columned-center {
+		.morebeak-link {
+			text-decoration: none;
+		}
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		.hasHermeticProblem {
+			position: absolute;
+			font-size: 50px;
+			animation: hasHermeticProblem 1s infinite;
+			margin-left: 73px;
+		}
+	}
+
+	.top, .mid, .bottom {
+		width: 100%;
+		height: calc(100%/3);
+		text-align: center;
+		line-height: 18px;
+	}
+
+	.top {
+		.title {
+			font-size: 23px;
+			font-weight: 700;
+		}
+	}
+
+	.mid {
+		background-color: $no-data-color;
+	}
+
+	.mid, .bottom {
+		
+		.content {
+			font-size: 18px;
+			// text-decoration: none;
+		    font-weight: 500;
+
+		   &.bad {
+		   		color: $bad-text;
+		   }
+		}
+	}
+}
+@keyframes hasHermeticProblem{
+	0% {
+		opacity: .5;	
+	}
+	50% {
+		opacity: 0;
+	}
+	100% {
+		opacity: .5;		
+	}
+}

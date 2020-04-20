@@ -1,0 +1,104 @@
+
+.flowModal {
+
+	/*height: 100%;*/
+	box-sizing: border-box;
+	padding: 20px 0px;
+	text-align: right;
+	
+	input {
+		direction: rtl;
+		border: solid 1px white;
+		border-radius: 2px 2px 2px 2px;
+	}
+
+	
+
+	> .flow-modal-content {
+
+		.buttons {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 50px;
+
+			.savebtn {
+					background-color: var(--color-normal-dark);
+					border-radius: 5px;
+					/*border-radius: 3px 3px 3px 3px;*/
+					border: none;
+					width: 50px;
+					height: 30px;
+					margin-left: 25px;
+					/*margin-top: 20px;*/
+					color: var(--item-color);
+			}
+
+			.cancelbtn {
+					background-color: var(--color-critical-dark);
+					border-radius: 5px;
+					
+					/*border-radius: 3px 3px 3px 3px;*/
+					border: none;
+					width: 50px;
+					height: 30px;
+					color: var(--item-color);
+			}
+		}
+
+		> .input-title {
+			display: inline-block;
+			/*font-weight: 700;*/
+			/*color: var(--main-color);*/
+			/*color: #777777;*/
+			color: var(--item-color);
+			direction: rtl;
+			margin-right: 45px;
+			padding: 7px 10px;
+			&:after {
+				content: ":";
+			}
+		}
+
+		direction: rtl;
+
+		> input {
+			display: inline-block;
+			color: var(--item-color);
+			background: none;
+			border: none;
+			float: left;
+			margin-left: 45px;
+			width: 145px;
+			outline: none;
+			padding: 8px 10px;
+			cursor: default;
+		}
+
+		&:not(.disabled) {
+			> input {
+				&:not(:focus):hover {
+					cursor: pointer;
+					color: white;
+				}
+
+				&:focus {
+					background: rgba(255, 255, 255, .1);
+					cursor: text;
+				}
+			}
+
+			> textarea {
+				&:not(:focus):hover {
+					cursor: pointer;
+					color: white;
+				}
+
+				&:focus {
+					background: rgba(255, 255, 255, .1);
+					cursor: text;
+				}
+			}
+		}
+	}
+}

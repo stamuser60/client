@@ -1,0 +1,44 @@
+.Background {
+	/* Animation properties */
+	/*animation-name: bg-show;*/
+	/*animation-duration: 1000ms;*/
+	/*animation-fill-mode: backwards;*/
+	/*animation-timing-function: ease-in-out;*/
+	/*background-color: red;*/
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: -1000;
+	width: 100%;
+	height: 100%;
+/*	background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url(./assets/bg_1.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	opacity: .45;
+	box-shadow: 0 0 1000px 0 rgba(0,0,0,.5) inset;
+	filter: grayscale(100%);*/
+
+	background-size: cover;
+    background-image: -webkit-radial-gradient(center, rgba(255, 255, 255, .7), rgba(0, 0, 0, 0.5)),
+ url(../../config/assets/BackgroundTexture_Noise.png);
+
+}
+
+.Background--outer{
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: -1001;
+	width: 100%;
+	height: 100%;
+	/*background-color: rgba(0,0,0,.4);*/
+	background-color: black;
+}
+
+@keyframes bg-show {
+	from {
+		opacity: 0;
+	}
+}
+

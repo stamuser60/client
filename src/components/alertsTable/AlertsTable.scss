@@ -1,0 +1,122 @@
+$width: 100%;
+$height: 100%;
+$duration: .5s;
+
+.AlertsTable {
+    overflow-x: auto;
+    overflow-y: auto;
+    // to change
+    height: 84%; 
+    position: relative;
+
+    table {
+        border-collapse: collapse;
+        border-right: black solid 3px;
+        border-left: black solid 3px;
+        table-layout: fixed;
+        width: $width;
+
+        .alertTr {
+            transition: background-color .3s;
+            border: black 1px solid;
+            &:hover {
+                border-top: rgba(255, 255, 255, 0.6) 2px solid;
+                border-bottom: rgba(255, 255, 255, 0.6) 2px solid;
+            }
+            &.active {
+                background-color: rgba(136, 136, 136, 0.62);
+            }
+        }        
+
+        tr {
+            user-select: pointer;
+            color:white;
+            height: 30px;
+            th {
+                &.sev, &.maktag, &.node, &.date, &.text {
+                    text-align: center;
+                    cursor: pointer;                  
+                }
+                &.active {
+                    background-color: rgba(136, 136, 136, 0.62);
+                }
+            }
+
+            .sev, .maktag, .node, .date, .text {
+                padding-left: 5px;
+                padding-right: 5px;
+                text-align: center;  
+                cursor: pointer;                            
+            }
+            .sev {
+                width: 45px; 
+            }
+            .maktag {
+                width: 45px;
+            }
+            .node {
+                width:140px;
+                overflow: hidden;
+                word-break: break-all;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+            .date {
+                width:155px;
+            }
+            .text {
+                text-align: left;
+                padding-right: 10px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap; 
+            }
+        }
+        .natural {
+			color: var(--color-natural-regular);
+		}
+		
+		.normal {
+			color: var(--color-normal-regular);
+		}
+
+		.warning {
+			color: var(--color-warning-regular);
+		}
+
+		.minor {
+			color: var(--color-minor-regular);
+		}
+
+		.major {
+			color: var(--color-major-regular);
+		}
+
+		.critical {
+			color: var(--color-critical-regular);
+		}
+
+        .normalBackground {
+          background-color: rgba(186, 218, 142, 0.8);
+        }
+
+        .minorBackground {
+          background-color: rgba(218, 201, 142, 0.8);
+        }
+
+        .majorBackground {
+          background-color: rgba(218, 173, 142, 0.8);
+        }
+
+        .criticalBackground {
+          background-color: rgba(218, 143, 142, 0.8);
+        }
+
+        .warningBackground {
+          background-color: rgba(142, 208, 218, 0.8);
+        }
+    }
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--color-natural-extralight) !important; }

@@ -1,0 +1,22 @@
+.alertSearch .searchInput {
+  padding: 7px;
+  font-size: 15px;
+  border: 1px solid white;
+  float: left;
+  width: 260px;
+  background: black;
+  border-radius: 6px 0 0 6px;
+  color: white;
+  border-right: none;
+  outline: none; }
+
+.alertSearch .searchIcon {
+  padding: 7px;
+  background: black;
+  color: white;
+  font-size: 15px;
+  border: 1px solid white;
+  border-left: none;
+  border-radius: 0 6px 6px 0;
+  user-select: none;
+  outline: none; }
