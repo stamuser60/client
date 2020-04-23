@@ -591,7 +591,7 @@ class Home extends React.Component {
 		if (this.graphanaIsAvailable()) {
 			const selectedNodeObj = this.props.flow.nodes[this.state.nodeContextMenu.id]
 			let nodeName = selectedNodeObj.name
-			if (nodeName.includes(<domainName>)) {
+			if (nodeName.includes(<domainName/>)) {
 				nodeName = nodeName.slice(0, -10)
 			}
 			window.open(`${process.env.REACT_APP_GRAFANA_URL}${nodeName}&${process.env.REACT_APP_GRAFANA_TIME_QUERY}`)
@@ -828,7 +828,12 @@ class Home extends React.Component {
 						<AlertSearch setFilter={this.changeAlertsFilter}></AlertSearch>
 					</BottomTitle>
 					<Row>
-						<AlertsTable isOpen={this.state.bottomBarShow} filter={this.state.filter} alerts={props.alerts.nodes[selectedNodeObj.id] ? this.getAlertsList(selectedNodeObj.id) : this.getAlertsTable()}/>
+						<AlertsTable 
+						isOpen={this.state.bottomBarShow} 
+						filter={this.state.filter} 
+						alerts={props.alerts.nodes[selectedNodeObj.id] 
+						? this.getAlertsList(selectedNodeObj.id) 
+						: this.getAlertsTable()}/>
 					</Row>
 				</BottomBar>
 				<CancelPresentation show={(this.props.screenMode === 'PRESENTATION')} mode={this.props.screenMode} cancel={() => {this.changeMode(MODES.NORMAL)}}/>

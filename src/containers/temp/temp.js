@@ -5,7 +5,12 @@ import {
 	getFlowAlerts,
 	changeFilter,
 	setNewFlowAlerts
-} from '../../modules/alerts'
+} from '../../modules/alerts';
+import { clearChanges, saveChanges } 
+from '../../modules/flow'
+import { switchModeToNormal, switchModeToEdit, switchModeToOpen, resetNodesToCopy, resetNodesToCut } 
+from '../../modules/app'
+
 import { MODES } from '../../helpers/general.helper';
 import BottomBar from '../../components/bottom-bar';
 import CountdownDisplay from '../../components/countdown-display/'
@@ -18,8 +23,6 @@ import io from 'socket.io-client'
 import {flowsNotificationsSocketUrl} from '../../config/general.config'
 import {values, mapValues} from 'lodash'
 import LineLoader from '../../components/line-loader/'
-import { clearChanges, saveChanges } from '../../modules/flow'
-import { switchModeToNormal, switchModeToEdit, switchModeToOpen, resetNodesToCopy, resetNodesToCut } from '../../modules/app'
 
 const mapStateToProps = state => ({
 	alerts: state.alerts,
@@ -36,6 +39,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 	switchModeToEdit,
 	switchModeToOpen,
 	saveChanges,
+	
 	resetNodesToCut,
 	resetNodesToCopy
 }, dispatch)
@@ -213,6 +217,7 @@ class Temp extends React.Component {
 					open={()=>{
 						 this.props.switchModeToOpen() 
 					}}
+					
 					close={()=>{
 						 this.props.switchModeToNormal();
 					}}

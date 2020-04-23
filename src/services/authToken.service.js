@@ -70,11 +70,14 @@ function authTokenFromCookie() {
 export function setAuthToken() {
   let token, newToken
   try {
-    token = authTokenFromCookie()
-    let decodedToken = decodeAuthToken(token)
-    let parsedToken = parseAuthToken(decodedToken)
-    newToken = signNewAuthJWT(parsedToken)
+    token = authTokenFromCookie();
+    let decodedToken = decodeAuthToken(token);
+    let parsedToken = parseAuthToken(decodedToken);
+    newToken = signNewAuthJWT(parsedToken);
+   
+
   } catch (e) {
+    
     console.log('Error getting auth token: ', e.message)
     newToken = getBlankToken()
   }

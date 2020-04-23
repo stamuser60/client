@@ -501,33 +501,87 @@ export const clearChanges = () => {
   }
 }
 
+// export const fetchFlow = (id) =>{
+
+// 	return dispatch => {
+
+// 		dispatch({
+//             type: GET_FLOW_PENDING,
+//         })
+
+// 		fetch(`${serverSideUrl}/flows/get/${id}`, fetchOptions())
+// 			.then(res => {
+// 				return res.json()
+// 			}).then(flow => {
+
+// 				const offset = calcCenterOffset(flow)
+
+// 				dispatch({
+// 					type: GET_FLOW_COMPLETE,
+// 					payload: {...flow, offset}
+// 				})
+// 			}, response => {
+// 				popupErrorAlert('הייתה שגיאה בניסיון לקבל את המסלול', 5)(dispatch)
+// 				dispatch({
+// 					type: GET_FLOW_FAILED,
+// 					payload: {response}
+// 				})
+// 			})
+// 	}
+// }
+
+
 export const fetchFlow = (id) =>{
 
-	return dispatch => {
+ console.log("fetchFlow")
+ return dispatch => {
 
-		dispatch({
+  dispatch({
             type: GET_FLOW_PENDING,
         })
 
-		fetch(`${serverSideUrl}/flows/get/${id}`, fetchOptions())
-			.then(res => {
-				return res.json()
-			}).then(flow => {
+  // fetch(${serverSideUrl}/flows/get/${id}, fetchOptions())
+  //  .then(res => {
+  //   return res.json()
+  //  }).then(flow => {
 
-				const offset = calcCenterOffset(flow)
 
-				dispatch({
-					type: GET_FLOW_COMPLETE,
-					payload: {...flow, offset}
-				})
-			}, response => {
-				popupErrorAlert('הייתה שגיאה בניסיון לקבל את המסלול', 5)(dispatch)
-				dispatch({
-					type: GET_FLOW_FAILED,
-					payload: {response}
-				})
-			})
-	}
+  //   dispatch({
+  //    type: GET_FLOW_COMPLETE,
+  //    payload: {...flow, offset}
+  //   })
+  //  }, response => {
+  //   popupErrorAlert('הייתה שגיאה בניסיון לקבל את המסלול', 5)(dispatch)
+  //   dispatch({
+  //    type: GET_FLOW_FAILED,
+  //    payload: {response}
+  //   })
+  //  })
+  const flow = {
+   name: "test",
+   id: "GPvp9-gIf",
+   displayName: "test",
+   nodes:{
+    aaa:{ 
+     name:"test",
+     id:"aaa",
+     displayName:"sdsd",
+     x:10,
+     y: 20,
+     description: "Sdsdssdssdsdsdsd"
+    }
+   },
+   links: []
+  }
+  const offset = calcCenterOffset(flow)
+
+
+  dispatch({
+   type: GET_FLOW_COMPLETE,
+   payload: {...flow, offset}
+  })
+  
+ }
 }
 
 export const pasteCopyOfNewNode = (nodeToPaste, flows, { x, y }) =>{

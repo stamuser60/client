@@ -10,6 +10,12 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { lobbyId } from '../../config/general.config'
 
+import BottomBar from '../../components/bottom-bar';
+import CountdownDisplay from '../../components/countdown-display/'
+import BottomTitle from '../../components/bottom-title/'
+import AlertSearch from '../../components/alertSearch/'
+import Row from '../../components/row/'
+import AlertsTable from '../../components/alertsTable/'
 const mapDispatchToProps = dispatch => bindActionCreators({
   changePage: (path) => push(path)
 }, dispatch)
@@ -32,6 +38,44 @@ class Tools extends React.Component {
 				}
 				this.props.changePage(`/lobby/${dashboardId}`)
 			}}/>
+{/* <BottomBar 
+					show = {this.state.bottomBarShow}
+					title = {
+						<CountdownDisplay 
+						updateTime={this.props.alerts.updateTime} 
+						lastRefresh={this.state.interval.intervalTime} 
+						/>
+					}
+					changes={this.props.changes}
+					mode={this.props.screenMode} 
+					search={ event => {this.props.openSearch()}}
+					edit={()=> {this.props.switchModeToEdit()}}
+					cancel={()=>{this.resetApplicationState()}}
+					save={()=>{
+						this.props.saveChanges({...this.props.changes})
+						this.resetApplicationState()
+					}}
+					open={()=>{
+						 this.props.switchModeToOpen() 
+					}}
+					close={()=>{
+						 this.props.switchModeToNormal();
+					}}
+					>
+					<BottomTitle>
+						דף הבית
+					</BottomTitle>
+					<BottomTitle>
+						<AlertSearch setFilter={this.changeAlertsFilter}></AlertSearch>
+					</BottomTitle>
+					<Row>
+						<AlertsTable 
+						isOpen={this.state.bottomBarShow} 
+						filter={this.state.filter} 
+						alerts={this.getAlertsTable()}/>
+					</Row>
+				</BottomBar> */}
+
 			<SideBar 
 			show={this.props.searchOpen} 
 			left={true}
@@ -40,7 +84,7 @@ class Tools extends React.Component {
 				<SideBarSection title="חיפוש" open={true}>
 					<Search
 					open = {this.props.searchOpen}
-					onSearchInput = {this.props.onSearchInput}
+			 		onSearchInput = {this.props.onSearchInput}
 					searchValue = {this.props.searchValue}
 					changePage={this.props.changePage} 
 					/>

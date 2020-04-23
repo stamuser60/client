@@ -124,7 +124,6 @@ class Alert extends React.Component{
 	    );
 	}
 }
-
 						//{onClickEmpty = {this.addVip}}
 						//{onClickFull = {this.removeVip}}
 export default Alert;

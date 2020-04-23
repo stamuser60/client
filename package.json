@@ -13,12 +13,11 @@
   },
   "devDependencies": {
     "dotenv": "^8.0.0",
-    "https": "^1.0.0",
     "fs": "0.0.2",
-    "react-scripts": "3.0.1"
+    "https": "^1.0.0",
+    "react-scripts": "^3.4.1"
   },
   "dependencies": {
-    "@mil-757/cpr-adfs": "^1.0.2",
     "body-parser": "^1.18.3",
     "connected-react-router": "6.4.0",
     "cookie-parser": "^1.4.3",
@@ -31,7 +30,7 @@
     "lodash": "^4.17.11",
     "moment": "^2.22.2",
     "moment-timezone": "^0.5.23",
-    "node-sass": "4.11.0",
+    "node-sass": "^4.13.1",
     "prop-types": "^15.6.2",
     "react": "16.9.0",
     "react-dom": "16.9.0",

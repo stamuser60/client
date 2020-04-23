@@ -40,6 +40,11 @@ if (process.env.USE_ADFS == 'true') {
     app.use("/auth", auth.default.router);
     app.get('/identify', (req, res, next) => {
         samlAuth.init(`https://${req.get("host")}`);
+
+  // Cookies that have been signed
+  console.log('Signed Cookies: ', req.signedCookies)
+  console.log('////////////////////')
+
         if (!req.cookies[process.env.ADFS_COOKIE_NAME]) {
             return res.redirect("/auth/saml");
         }
