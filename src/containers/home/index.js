@@ -36,7 +36,10 @@ import LinkContextMenu from '../../components/linkContextMenu/lineContextMenu'
 import io from 'socket.io-client'
 import { rootId, circleDiameter, flowsNotificationsSocketUrl, lastUpdateChannel} from '../../config/general.config.js'
 import { bindActionCreators } from 'redux'
-import {history} from '../../modules'
+import {history} from '../../modules';
+
+import BottomBarContent from '../../components/BottomBarContent/'
+
 import {
   changeXY,
   changeOffset,
@@ -821,7 +824,11 @@ class Home extends React.Component {
 					open={this.props.switchModeToOpen}
 					close={this.props.switchModeToNormal}
 					>
-					<BottomTitle>
+						<BottomBarContent title={props.flow.displayName}
+						alertsTable={props.alerts.nodes[selectedNodeObj.id] 
+							? this.getAlertsList(selectedNodeObj.id) 
+							: this.getAlertsTable()}/>
+					{/* <BottomTitle>
 						{props.flow.displayName}
 					</BottomTitle>
 					<BottomTitle>
@@ -834,7 +841,7 @@ class Home extends React.Component {
 						alerts={props.alerts.nodes[selectedNodeObj.id] 
 						? this.getAlertsList(selectedNodeObj.id) 
 						: this.getAlertsTable()}/>
-					</Row>
+					</Row> */}
 				</BottomBar>
 				<CancelPresentation show={(this.props.screenMode === 'PRESENTATION')} mode={this.props.screenMode} cancel={() => {this.changeMode(MODES.NORMAL)}}/>
 				<ModalWindow mode={this.state.modal.open}

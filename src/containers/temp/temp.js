@@ -1,15 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { 
+import {
 	getFlowAlerts,
 	changeFilter,
 	setNewFlowAlerts
 } from '../../modules/alerts';
-import { clearChanges, saveChanges } 
-from '../../modules/flow'
-import { switchModeToNormal, switchModeToEdit, switchModeToOpen, resetNodesToCopy, resetNodesToCut } 
-from '../../modules/app'
+import { clearChanges, saveChanges }
+	from '../../modules/flow'
+import { switchModeToNormal, switchModeToEdit, switchModeToOpen, resetNodesToCopy, resetNodesToCut }
+	from '../../modules/app'
 
 import { MODES } from '../../helpers/general.helper';
 import BottomBar from '../../components/bottom-bar';
@@ -20,10 +20,13 @@ import Row from '../../components/row/'
 import AlertsTable from '../../components/alertsTable/'
 import moment from 'moment'
 import io from 'socket.io-client'
-import {flowsNotificationsSocketUrl} from '../../config/general.config'
-import {values, mapValues} from 'lodash'
+import { flowsNotificationsSocketUrl } from '../../config/general.config'
+import { values, mapValues } from 'lodash'
 import LineLoader from '../../components/line-loader/'
 
+
+import BottomBarContent from '../../components/BottomBarContent/';
+import BottomBarIntroduce from '../BottomBarIntroduce/'
 const mapStateToProps = state => ({
 	alerts: state.alerts,
 	changes: state.flow.changes,
@@ -39,7 +42,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 	switchModeToEdit,
 	switchModeToOpen,
 	saveChanges,
-	
+
 	resetNodesToCut,
 	resetNodesToCopy
 }, dispatch)
@@ -55,15 +58,15 @@ class Temp extends React.Component {
 	}
 
 	updateInterval = (id) => {
-		if (id){
-			this.setState( prevState => ({
+		if (id) {
+			this.setState(prevState => ({
 				interval: {
 					...prevState.interval,
 					id
 				}
 			}))
 		} else {
-			this.setState( prevState => ({
+			this.setState(prevState => ({
 				interval: {
 					...prevState.interval,
 				}
@@ -75,20 +78,18 @@ class Temp extends React.Component {
 		this.props.getFlowAlerts(flowId)
 	}
 
-	changeAlertsFilter = (filter) => {
-		this.setState({filter})
-	}
+
 
 	getAlertsTable = () => {
 		let alerts = {}
-		if(this.props.alerts) {
+		if (this.props.alerts) {
 			mapValues(this.props.alerts.nodes, node => {
 				values(node.alerts).map(alert => {
 					alerts[alert.id] = alert
 				})
 			})
 		}
-		
+
 		return values(alerts)
 	}
 
@@ -100,15 +101,15 @@ class Temp extends React.Component {
 	updateTimebarEdges = () => {
 		// min filter should be now
 		const now = moment(),
-		{from, until, minFilter} = this.props.alerts.filter,
-		filterDelta = now - minFilter,
-		// to be reviewed
-		newFilter = {
-			from: from.clone().add(filterDelta,'ms'),
-			until: until.clone().add(filterDelta,'ms').add('10', 'years'),  //TODO: .add('10', 'years') is a part of a fix to handle future alerts, need to check it later to see how to really fix it instead of using that plaster.
-			maxFilter: now.clone().subtract(6,'days'),
-			minFilter: now.clone()
-		}
+			{ from, until, minFilter } = this.props.alerts.filter,
+			filterDelta = now - minFilter,
+			// to be reviewed
+			newFilter = {
+				from: from.clone().add(filterDelta, 'ms'),
+				until: until.clone().add(filterDelta, 'ms').add('10', 'years'),  //TODO: .add('10', 'years') is a part of a fix to handle future alerts, need to check it later to see how to really fix it instead of using that plaster.
+				maxFilter: now.clone().subtract(6, 'days'),
+				minFilter: now.clone()
+			}
 
 		this.props.changeFilter(newFilter)
 	}
@@ -120,7 +121,7 @@ class Temp extends React.Component {
 		this.endInterval()
 
 		// this.onUpdate(flowId)
-		
+
 
 		const id = setInterval(() => {
 
@@ -139,32 +140,33 @@ class Temp extends React.Component {
 		if (this.state.interval.id) clearInterval(this.state.interval.id)
 	}
 
-	componentDidMount () {
+	componentDidMount() {
 		this.socketHandler(this.props.flowId)
 		this.startInterval(this.props.flowId)
-	} 
+	}
 
-	componentWillReceiveProps(nextProps){
+	componentWillReceiveProps(nextProps) {
 		if (this.props.flowId !== nextProps.flowId) {
 			this.socket.close()
-			this.socketHandler(nextProps.flowId)			
+			this.socketHandler(nextProps.flowId)
 		}
-	}	
+	}
+	
 
 	socketHandler = (flowId) => {
 		const endPoint = flowsNotificationsSocketUrl
-		this.socket = io.connect(endPoint, {query: {flowRoom: flowId}})
-		this.socket.on(flowId, (data)=> {
+		this.socket = io.connect(endPoint, { query: { flowRoom: flowId } })
+		this.socket.on(flowId, (data) => {
 			this.props.setNewFlowAlerts(data)
-			if(this.props.setCritical) {
+			if (this.props.setCritical) {
 				this.props.setCritical(this.countCriticalAlerts(this.props.alerts.nodes))
 			}
-			
+
 		})
 	}
 
-	componentWillUnmount () {
-		if(this.props.screenMode === MODES.OPEN) {
+	componentWillUnmount() {
+		if (this.props.screenMode === MODES.OPEN) {
 			this.props.switchModeToNormal();
 		}
 
@@ -177,8 +179,8 @@ class Temp extends React.Component {
 		let nodeAlertsDict = alerts
 		Object.keys(nodeAlertsDict).map(nodeKey => {
 			let count = 0
-			mapValues(nodeAlertsDict[nodeKey].alerts, (alert)=> {
-				if(alert.severity == "CRITICAL") {
+			mapValues(nodeAlertsDict[nodeKey].alerts, (alert) => {
+				if (alert.severity == "CRITICAL") {
 					count++
 				}
 			})
@@ -196,47 +198,62 @@ class Temp extends React.Component {
 
 	render() {
 		return <div>
-		<LineLoader show={(this.props.alerts.status === 'FETCHING')}/>
-		<BottomBar 
-					show = {this.state.bottomBarShow}
-					title = {
-						<CountdownDisplay 
-						updateTime={this.props.alerts.updateTime} 
-						lastRefresh={this.state.interval.intervalTime} 
-						/>
-					}
-					changes={this.props.changes}
-					mode={this.props.screenMode} 
-					search={ event => {this.props.openSearch()}}
-					edit={()=> {this.props.switchModeToEdit()}}
-					cancel={()=>{this.resetApplicationState()}}
-					save={()=>{
-						this.props.saveChanges({...this.props.changes})
-						this.resetApplicationState()
-					}}
-					open={()=>{
-						 this.props.switchModeToOpen() 
-					}}
-					
-					close={()=>{
-						 this.props.switchModeToNormal();
-					}}
-					>
-					<BottomTitle>
-						דף הבית
-					</BottomTitle>
-					<BottomTitle>
-						<AlertSearch setFilter={this.changeAlertsFilter}></AlertSearch>
-					</BottomTitle>
-					<Row>
-						<AlertsTable 
-						isOpen={this.state.bottomBarShow} 
-						filter={this.state.filter} 
-						alerts={this.getAlertsTable()}/>
-					</Row>
-				</BottomBar>
-			</div>
-  }
+			<LineLoader show={(this.props.alerts.status === 'FETCHING')} />
+			<BottomBarIntroduce
+				search={event => { this.props.openSearch() }}
+				edit={() => { this.props.switchModeToEdit() }}
+				cancel={() => {
+					this.props.switchModeToNormal()
+					this.props.resetNodesToCut()
+				}}
+				save={() => {
+					this.props.switchModeToNormal()
+					this.props.resetNodesToCut()
+					this.props.resetNodesToCopy()
+				}}
+				bottomBarContent= { <BottomBarContent title={"דף הבית"}
+				alertsTable={this.getAlertsTable()} />}
+				/>	 
+			{/* <BottomBar
+				show={this.state.bottomBarShow}
+				title={
+					<CountdownDisplay
+						updateTime={this.props.alerts.updateTime}
+						lastRefresh={this.state.interval.intervalTime}
+					/>
+				}
+				changes={this.props.changes}
+				mode={this.props.screenMode}
+				search={event => { this.props.openSearch() }}
+
+				cancel={() => {
+					this.props.clearChanges()
+					this.props.resetNodesToCopy()
+
+					this.props.switchModeToNormal()
+					this.props.resetNodesToCut()
+					// this.resetApplicationState()
+				}}
+				save={() => {
+					this.props.saveChanges({ ...this.props.changes })
+					this.props.clearChanges()
+
+					this.props.switchModeToNormal()
+					this.props.resetNodesToCut()
+					this.props.resetNodesToCopy()
+					//	this.resetApplicationState()
+				}}
+				open={this.props.switchModeToOpen}
+
+				close={this.props.switchModeToNormal}
+			>
+
+				<BottomBarContent title={"דף הבית"}
+					alertsTable={this.getAlertsTable()} />
+			</BottomBar> */}		
+
+		</div>
+	}
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Temp);
+export default connect(mapStateToProps, mapDispatchToProps)(Temp);
