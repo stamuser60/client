@@ -50,210 +50,169 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 
 class Temp extends React.Component {
 
-	state = {
-		interval: {
-			id: ""
-		},
-		filter: ""
-	}
+	// state = {
+	// 	interval: {
+	// 		id: ""
+	// 	},
+	// 	filter: ""
+	// }
 
-	updateInterval = (id) => {
-		if (id) {
-			this.setState(prevState => ({
-				interval: {
-					...prevState.interval,
-					id
-				}
-			}))
-		} else {
-			this.setState(prevState => ({
-				interval: {
-					...prevState.interval,
-				}
-			}))
-		}
-	}
+	// updateInterval = (id) => {
+	// 	if (id) {
+	// 		this.setState(prevState => ({
+	// 			interval: {
+	// 				...prevState.interval,
+	// 				id
+	// 			}
+	// 		}))
+	// 	} else {
+	// 		this.setState(prevState => ({
+	// 			interval: {
+	// 				...prevState.interval,
+	// 			}
+	// 		}))
+	// 	}
+	// }
 
-	getAlerts = flowId => {
-		this.props.getFlowAlerts(flowId)
-	}
-
-
-
-	getAlertsTable = () => {
-		let alerts = {}
-		if (this.props.alerts) {
-			mapValues(this.props.alerts.nodes, node => {
-				values(node.alerts).map(alert => {
-					alerts[alert.id] = alert
-				})
-			})
-		}
-
-		return values(alerts)
-	}
-
-	onUpdate = (flowId) => {
-		// this.getAlerts(flowId)
-		if (this.props.onUpdate) this.props.onUpdate()
-	}
-
-	updateTimebarEdges = () => {
-		// min filter should be now
-		const now = moment(),
-			{ from, until, minFilter } = this.props.alerts.filter,
-			filterDelta = now - minFilter,
-			// to be reviewed
-			newFilter = {
-				from: from.clone().add(filterDelta, 'ms'),
-				until: until.clone().add(filterDelta, 'ms').add('10', 'years'),  //TODO: .add('10', 'years') is a part of a fix to handle future alerts, need to check it later to see how to really fix it instead of using that plaster.
-				maxFilter: now.clone().subtract(6, 'days'),
-				minFilter: now.clone()
-			}
-
-		this.props.changeFilter(newFilter)
-	}
-
-	startInterval = (flowId) => {
-
-		const intervalTime = 30 * 1000
-
-		this.endInterval()
-
-		// this.onUpdate(flowId)
+	// getAlerts = flowId => {
+	// 	this.props.getFlowAlerts(flowId)
+	// }
 
 
-		const id = setInterval(() => {
 
-			this.updateInterval()
+	// getAlertsTable = () => {
+	// 	let alerts = {}
+	// 	if (this.props.alerts) {
+	// 		mapValues(this.props.alerts.nodes, node => {
+	// 			values(node.alerts).map(alert => {
+	// 				alerts[alert.id] = alert
+	// 			})
+	// 		})
+	// 	}
 
-			this.updateTimebarEdges()
+	// 	return values(alerts)
+	// }
 
-			// this.onUpdate(flowId)
+	// onUpdate = (flowId) => {
+	// 	// this.getAlerts(flowId)
+	// 	if (this.props.onUpdate) this.props.onUpdate()
+	// }
 
-		}, intervalTime)
+	// updateTimebarEdges = () => {
+	// 	// min filter should be now
+	// 	const now = moment(),
+	// 		{ from, until, minFilter } = this.props.alerts.filter,
+	// 		filterDelta = now - minFilter,
+	// 		// to be reviewed
+	// 		newFilter = {
+	// 			from: from.clone().add(filterDelta, 'ms'),
+	// 			until: until.clone().add(filterDelta, 'ms').add('10', 'years'),  //TODO: .add('10', 'years') is a part of a fix to handle future alerts, need to check it later to see how to really fix it instead of using that plaster.
+	// 			maxFilter: now.clone().subtract(6, 'days'),
+	// 			minFilter: now.clone()
+	// 		}
 
-		this.updateInterval(id)
-	}
+	// 	this.props.changeFilter(newFilter)
+	// }
 
-	endInterval = () => {
-		if (this.state.interval.id) clearInterval(this.state.interval.id)
-	}
+	// startInterval = (flowId) => {
 
-	componentDidMount() {
-		this.socketHandler(this.props.flowId)
-		this.startInterval(this.props.flowId)
-	}
+	// 	const intervalTime = 30 * 1000
 
-	componentWillReceiveProps(nextProps) {
-		if (this.props.flowId !== nextProps.flowId) {
-			this.socket.close()
-			this.socketHandler(nextProps.flowId)
-		}
-	}
+	// 	this.endInterval()
+
+	// 	// this.onUpdate(flowId)
+
+
+	// 	const id = setInterval(() => {
+
+	// 		this.updateInterval()
+
+	// 		this.updateTimebarEdges()
+
+	// 		// this.onUpdate(flowId)
+
+	// 	}, intervalTime)
+
+	// 	this.updateInterval(id)
+	// }
+
+	// endInterval = () => {
+	// 	if (this.state.interval.id) clearInterval(this.state.interval.id)
+	// }
+
+	// componentDidMount() {
+	// 	this.socketHandler(this.props.flowId)
+	// 	this.startInterval(this.props.flowId)
+	// }
+
+	// componentWillReceiveProps(nextProps) {
+	// 	if (this.props.flowId !== nextProps.flowId) {
+	// 		this.socket.close()
+	// 		this.socketHandler(nextProps.flowId)
+	// 	}
+	// }
 	
 
-	socketHandler = (flowId) => {
-		const endPoint = flowsNotificationsSocketUrl
-		this.socket = io.connect(endPoint, { query: { flowRoom: flowId } })
-		this.socket.on(flowId, (data) => {
-			this.props.setNewFlowAlerts(data)
-			if (this.props.setCritical) {
-				this.props.setCritical(this.countCriticalAlerts(this.props.alerts.nodes))
-			}
+	// socketHandler = (flowId) => {
 
-		})
-	}
+	// 	const endPoint = flowsNotificationsSocketUrl
+	// 	this.socket = io.connect(endPoint, 
+	// 		{ query: { flowRoom: flowId } })
+	
+			
+	// }
 
-	componentWillUnmount() {
-		if (this.props.screenMode === MODES.OPEN) {
-			this.props.switchModeToNormal();
-		}
+	// componentWillUnmount() {
+	// 	if (this.props.screenMode === MODES.OPEN) {
+	// 		this.props.switchModeToNormal();
+	// 	}
 
-		this.socket.close()
-		this.endInterval()
-	}
+	// 	this.socket.close()
+	// 	this.endInterval()
+	// }
+	// countCriticalAlerts = (alerts) => {
+	// 	let nodeCriticalAlertsDict = {}
+	// 	let nodeAlertsDict = alerts
+	// 	Object.keys(nodeAlertsDict).map(nodeKey => {
+	// 		let count = 0
+	// 		mapValues(nodeAlertsDict[nodeKey].alerts, (alert) => {
+	// 			if (alert.severity == "CRITICAL") {
+	// 				count++
+	// 			}
+	// 		})
+	// 		nodeCriticalAlertsDict[nodeKey] = count
+	// 	})
+	// 	return nodeCriticalAlertsDict
+	// }
+//no one call this function????!!!!!
+	// resetApplicationState = () => {
+	// 	this.props.clearChanges()
+	// 	this.props.switchModeToNormal()
+	// 	this.props.resetNodesToCut()
+	// 	this.props.resetNodesToCopy()
+	// }
 
-	countCriticalAlerts = (alerts) => {
-		let nodeCriticalAlertsDict = {}
-		let nodeAlertsDict = alerts
-		Object.keys(nodeAlertsDict).map(nodeKey => {
-			let count = 0
-			mapValues(nodeAlertsDict[nodeKey].alerts, (alert) => {
-				if (alert.severity == "CRITICAL") {
-					count++
-				}
-			})
-			nodeCriticalAlertsDict[nodeKey] = count
-		})
-		return nodeCriticalAlertsDict
-	}
+	// render() {
+	// 	return <div>
+	// 		<LineLoader show={(this.props.alerts.status === 'FETCHING')} />
+	// 		<BottomBarIntroduce
+	// 			search={event => { this.props.openSearch() }}
+	// 			edit={() => { this.props.switchModeToEdit() }}
+	// 			cancel={() => {
+	// 				this.props.switchModeToNormal()
+	// 				this.props.resetNodesToCut()
+	// 			}}
+	// 			save={() => {
+	// 				this.props.switchModeToNormal()
+	// 				this.props.resetNodesToCut()
+	// 				this.props.resetNodesToCopy()
+	// 			}}>
+	// 		 <BottomBarContent title={"דף הבית"}
+	// 			alertsTable={this.getAlertsTable()}/>
+    //          </BottomBarIntroduce>			 
 
-	resetApplicationState = () => {
-		this.props.clearChanges()
-		this.props.switchModeToNormal()
-		this.props.resetNodesToCut()
-		this.props.resetNodesToCopy()
-	}
-
-	render() {
-		return <div>
-			<LineLoader show={(this.props.alerts.status === 'FETCHING')} />
-			<BottomBarIntroduce
-				search={event => { this.props.openSearch() }}
-				edit={() => { this.props.switchModeToEdit() }}
-				cancel={() => {
-					this.props.switchModeToNormal()
-					this.props.resetNodesToCut()
-				}}
-				save={() => {
-					this.props.switchModeToNormal()
-					this.props.resetNodesToCut()
-					this.props.resetNodesToCopy()
-				}}
-				bottomBarContent= { <BottomBarContent title={"דף הבית"}
-				alertsTable={this.getAlertsTable()} />}
-				/>	 
-			{/* <BottomBar
-				show={this.state.bottomBarShow}
-				title={
-					<CountdownDisplay
-						updateTime={this.props.alerts.updateTime}
-						lastRefresh={this.state.interval.intervalTime}
-					/>
-				}
-				changes={this.props.changes}
-				mode={this.props.screenMode}
-				search={event => { this.props.openSearch() }}
-
-				cancel={() => {
-					this.props.clearChanges()
-					this.props.resetNodesToCopy()
-
-					this.props.switchModeToNormal()
-					this.props.resetNodesToCut()
-					// this.resetApplicationState()
-				}}
-				save={() => {
-					this.props.saveChanges({ ...this.props.changes })
-					this.props.clearChanges()
-
-					this.props.switchModeToNormal()
-					this.props.resetNodesToCut()
-					this.props.resetNodesToCopy()
-					//	this.resetApplicationState()
-				}}
-				open={this.props.switchModeToOpen}
-
-				close={this.props.switchModeToNormal}
-			>
-
-				<BottomBarContent title={"דף הבית"}
-					alertsTable={this.getAlertsTable()} />
-			</BottomBar> */}		
-
-		</div>
-	}
+	// 	</div>
+	// }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Temp);

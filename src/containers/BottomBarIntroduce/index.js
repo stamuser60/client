@@ -98,19 +98,7 @@ class BottomBarIntroduce extends React.Component {
                     this.props.switchModeToNormal();
                 }}
             >
-              { this.props.bottomBarContent}
-                {/* <BottomTitle>
-						דף הבית
-					</BottomTitle>
-					<BottomTitle>
-						<AlertSearch setFilter={this.changeAlertsFilter}></AlertSearch>
-					</BottomTitle>
-					<Row>
-						<AlertsTable 
-						isOpen={this.state.bottomBarShow} 
-						filter={this.state.filter} 
-						alerts={this.getAlertsTable()}/>
-					</Row> */}
+              { this.props.children}
             </BottomBar>
         </div>
     }
