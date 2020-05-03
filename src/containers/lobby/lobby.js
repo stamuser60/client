@@ -130,26 +130,24 @@ class Lobby extends React.Component {
 		}
 	}
 	lobbySocketHandler = (dashId) => {
-		this.socketHandler(dashId, lobbyNotificationsSocketUrl, () => {
-			this.socket.on(dashId, (data) => {
+		this.socketHandler(dashId, lobbyNotificationsSocketUrl,(data) => {
 				this.props.updateLobbyInfo(data)
-			})
-		})
+			}
+		)
 	}
 	flowSocketHandler = (flowId) => {
-		this.socketHandler(flowId, flowsNotificationsSocketUrl, () => {
-			this.socket.on(flowId, (data) => {
+		this.socketHandler(flowId, flowsNotificationsSocketUrl, (data) => {
 				this.props.setNewFlowAlerts(data)
 				if (this.props.setCritical) {
 					this.props.setCritical(this.countCriticalAlerts(this.props.alerts.nodes))
 				}
-	
-			})
-		})
+			}
+		)
 	}
 	socketHandler = (Id, endPoint, socketOn) => {
 		this.socket = io.connect(endPoint, { query: { dashRoom: Id } })
-		socketOn();
+		this.socket.on(Id,socketOn)
+		//socketOn();
 	}
 	countCriticalAlerts = (alerts) => {
 		let nodeCriticalAlertsDict = {}
@@ -206,8 +204,6 @@ class Lobby extends React.Component {
 		this.endInterval()
 
 		// this.onUpdate(flowId)
-
-
 		const id = setInterval(() => {
 
 			this.updateInterval()

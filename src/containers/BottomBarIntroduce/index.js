@@ -54,16 +54,7 @@ class BottomBarIntroduce extends React.Component {
             id: ""
         },
         filter: ""
-    }
-
-   
-
-  
-
-  
-  
-
-   
+    }   
 
     render() {
         return <div>
@@ -78,7 +69,7 @@ class BottomBarIntroduce extends React.Component {
                 }
                 changes={this.props.changes}
                 mode={this.props.screenMode}
-                search={event => { this.props.search() }}
+                search={event => {   this.props.search() }}
                 edit={this.props.edit}
                 cancel={() => {
                     this.props.clearChanges()
@@ -99,6 +90,7 @@ class BottomBarIntroduce extends React.Component {
                 }}
             >
               { this.props.children}
+
             </BottomBar>
         </div>
     }
